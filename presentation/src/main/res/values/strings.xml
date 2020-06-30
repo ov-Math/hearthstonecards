@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HearthstoneCards</string>
+    <string name="hearthstone">Hearthstone</string>
 </resources>
