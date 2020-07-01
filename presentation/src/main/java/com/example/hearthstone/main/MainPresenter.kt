@@ -41,7 +41,7 @@ class MainPresenter (private val navigator: Navigator,
             .with(cardClass)
             .execute()
             .subscribe({
-                navigateCardLit(it)
+                navigateCardLit(it, cardClass.text)
                 view?.hideLoading()
             },{
                 view?.hideLoading()
@@ -49,8 +49,8 @@ class MainPresenter (private val navigator: Navigator,
             })
     }
 
-    private fun navigateCardLit(list : List<CardDomain>) {
-        navigator.navigateCardList(getCardModelArrayFromCardDomainList(list))
+    private fun navigateCardLit(list : List<CardDomain>, filterText : String) {
+        navigator.navigateCardList(getCardModelArrayFromCardDomainList(list), filterText)
     }
 
     private fun getCardModelArrayFromCardDomainList(list : List<CardDomain>) : Array<CardModel> {

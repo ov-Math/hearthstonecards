@@ -8,9 +8,10 @@ import com.example.iddogs.core.BaseActivity
 
 class Navigator (private val activity: BaseActivity) {
 
-    fun navigateCardList(list : Array<CardModel>) {
+    fun navigateCardList(list : Array<CardModel>, activityTitle : String) {
         val intent = Intent(activity, CardListActivity::class.java)
         intent.putExtra(CardListPresenter.CARD_LIST, list)
+        intent.putExtra(CardListPresenter.ACTIVITY_TITLE, activityTitle)
         activity.startActivity(intent)
     }
 }
