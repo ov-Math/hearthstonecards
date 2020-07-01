@@ -1,7 +1,12 @@
 package com.example.data.repository
 
+import com.example.data.services.ServicesFactory
 import com.example.domain.core.CardsRepository
 import com.example.domain.model.*
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class CardsRepositoryImpl : CardsRepository {
 
@@ -27,5 +32,18 @@ class CardsRepositoryImpl : CardsRepository {
 
     override fun getQualities(): List<Qualities> {
         return mutableListOf(Qualities.FREE, Qualities.COMMON, Qualities.RARE, Qualities.RARE, Qualities.LEGENDARY)
+    }
+
+    override fun getCardsByClass(cardClass : Classes): Single<List<CardDomain>> {
+        return ServicesFactory.instance()
+            .getCardsServices()
+            .getCardsByClass(cardClass.text)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap {
+                Single.just(it.map {
+                    it.asDomainModel()
+                })
+            }
     }
 }
