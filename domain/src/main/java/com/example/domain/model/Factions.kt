@@ -1,5 +1,5 @@
 package com.example.domain.model
 
-enum class Factions (val text : String) {
+enum class Factions (override val text : String) : Filter {
     HORDE("Horde"), ALLIANCE("Alliance"), NEUTRAL("Neutral")
 }

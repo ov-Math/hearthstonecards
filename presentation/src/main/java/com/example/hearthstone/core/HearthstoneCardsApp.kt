@@ -4,11 +4,17 @@ import android.app.Application
 import android.content.Context
 import android.widget.TextView
 import com.example.hearthstone.R
+import com.example.hearthstone.core.koin.AppModule
+import com.example.hearthstone.core.koin.DataModule
+import com.example.hearthstone.core.koin.DomainModule
+import com.example.hearthstone.core.koin.PresentationModule
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.calligraphy3.FontMapper
 import io.github.inflationx.viewpump.ViewPump
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class HearthstoneCardsApp : Application() {
     companion object {
@@ -27,6 +33,11 @@ class HearthstoneCardsApp : Application() {
             )).build())
 
         appContext = applicationContext
+
+        startKoin {
+            androidContext(appContext)
+            modules(listOf(AppModule.get(), DataModule.get(), DomainModule.get(), PresentationModule.get()))
+        }
     }
 
     override fun attachBaseContext(base: Context?) {
