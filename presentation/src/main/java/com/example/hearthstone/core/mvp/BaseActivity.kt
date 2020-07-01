@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hearthstone.R
 
@@ -56,6 +57,10 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
             rootLayout.removeView(loading)
             loadingLayout = null
         }
+    }
+
+    override fun showGenericError() {
+        Toast.makeText(this, getString(R.string.generic_error), Toast.LENGTH_SHORT).show()
     }
 
 }

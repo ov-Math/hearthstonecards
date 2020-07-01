@@ -2,6 +2,8 @@ package com.example.hearthstone.main
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.model.Classes
+import com.example.domain.model.Filter
 import com.example.hearthstone.R
 import com.example.iddogs.core.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -11,6 +13,9 @@ import org.koin.core.parameter.parametersOf
 class MainActivity : BaseActivity(), MainView {
 
     private val presenter : MainPresenter by inject { parametersOf(this) }
+
+    override fun onBackPressed() {
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,5 +59,9 @@ class MainActivity : BaseActivity(), MainView {
     private fun setupFactionList() {
         factionList.adapter = FilterAdapter(presenter.factionList, this)
         factionList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    override fun onFilterSelected(filter: Filter) {
+        presenter.getCardsByFilter(filter)
     }
 }

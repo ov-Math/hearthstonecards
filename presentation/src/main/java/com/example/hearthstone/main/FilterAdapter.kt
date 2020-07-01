@@ -31,10 +31,10 @@ class FilterAdapter(): RecyclerView.Adapter<FilterViewHolder>() {
         holder.card.backgroundTintList = ColorStateList.valueOf(generateRandomColor())
 
         holder.card.setOnClickListener {
-            //activity.onFilterSelected(currentItem)
+            activity.onFilterSelected(currentItem)
         }
         holder.filterText.setOnClickListener {
-            //activity.onFilterSelected(currentItem)
+            activity.onFilterSelected(currentItem)
         }
 
     }
