@@ -27,7 +27,8 @@ class CardListAdapter () : RecyclerView.Adapter<CardListViewHolder>() {
         if(currentItem.img.isNullOrBlank()) {
             Glide.with(activity as CardListActivity).load(CardListPresenter.DEFAULT_CARD_IMG).into(holder.image)
         } else {
-            Glide.with(activity as CardListActivity).load(currentItem.img).into(holder.image)
+            val imageUrl = CardListPresenter.IMAGE_BASE_URL + currentItem.cardId + CardListPresenter.IMAGE_EXTENSION
+            Glide.with(activity as CardListActivity).load(imageUrl).into(holder.image)
         }
     }
 
