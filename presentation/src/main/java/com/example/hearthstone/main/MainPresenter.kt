@@ -1,10 +1,7 @@
 package com.example.hearthstone.main
 
 import com.example.domain.interactors.*
-import com.example.domain.model.CardDomain
-import com.example.domain.model.Classes
-import com.example.domain.model.Filter
-import com.example.domain.model.Sets
+import com.example.domain.model.*
 import com.example.hearthstone.core.Navigator
 import com.example.hearthstone.model.CardModel
 import com.example.iddogs.core.BasePresenter
@@ -17,7 +14,8 @@ class MainPresenter (private val navigator: Navigator,
                      private val getQualities: GetQualities,
                      private val getFactions: GetFactions,
                      private val getCardsByClass: GetCardsByClass,
-                     private val getCardsBySet: GetCardsBySet) : BasePresenter<MainView>() {
+                     private val getCardsBySet: GetCardsBySet,
+                     private val getCardsByRace: GetCardsByRace) : BasePresenter<MainView>() {
 
     var classesList = getClasses.execute()
     var racesList = getRaces.execute()
@@ -34,6 +32,9 @@ class MainPresenter (private val navigator: Navigator,
             }
             is Sets -> {
                 getCardsBySet(filter)
+            }
+            is Races -> {
+                getCardsByRace(filter)
             }
         }
     }
@@ -57,6 +58,19 @@ class MainPresenter (private val navigator: Navigator,
             .execute()
             .subscribe({
                 navigateCardLit(it, set.text)
+                view?.hideLoading()
+            },{
+                view?.hideLoading()
+                view?.showGenericError()
+            })
+    }
+
+    private fun getCardsByRace(race : Races) {
+        getCardsByRace
+            .with(race)
+            .execute()
+            .subscribe({
+                navigateCardLit(it, race.text)
                 view?.hideLoading()
             },{
                 view?.hideLoading()

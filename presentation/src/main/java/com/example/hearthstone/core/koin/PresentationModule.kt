@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 object PresentationModule {
     fun get() = module {
-        factory { (activity: BaseActivity) -> MainPresenter(Navigator((activity)), get(), get(), get(), get(), get(), get(), get()) }
+        factory { (activity: BaseActivity) -> MainPresenter(Navigator((activity)), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
         factory { (activity: BaseActivity) -> CardListPresenter(Navigator(activity)) }
     }
 }

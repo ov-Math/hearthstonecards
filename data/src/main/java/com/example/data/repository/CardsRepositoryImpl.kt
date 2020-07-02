@@ -59,4 +59,17 @@ class CardsRepositoryImpl : CardsRepository {
                 })
             }
     }
+
+    override fun getCardsByRace(race: Races): Single<List<CardDomain>> {
+        return ServicesFactory.instance()
+            .getCardsServices()
+            .getCardsByRace(race.text)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap {
+                Single.just(it.map {
+                    it.asDomainModel()
+                })
+            }
+    }
 }
