@@ -17,13 +17,11 @@ internal class ServicesFactory {
         }
     }
 
-    val retrofit = RequestManager.provideRetrofit("https://omgvamp-hearthstone-v1.p.rapidapi.com/")
-
     // Singletons
     private var cardsServices: CardsServices? = null
 
-    fun getCardsServices() : CardsServices {
-
+    fun getCardsServices(baseUrl : String) : CardsServices {
+        val retrofit = RequestManager.provideRetrofit(baseUrl)
         if(cardsServices == null) {
             cardsServices = retrofit.create(CardsServices::class.java)
         }

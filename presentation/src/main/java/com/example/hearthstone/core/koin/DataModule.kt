@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 object DataModule {
     fun get() = module {
-        single<CardsRepository> { CardsRepositoryImpl() }
+        single<CardsRepository> { CardsRepositoryImpl("https://omgvamp-hearthstone-v1.p.rapidapi.com/") }
     }
 }

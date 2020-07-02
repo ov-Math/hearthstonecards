@@ -28,7 +28,7 @@ object RequestManager {
         clientBuilder.addInterceptor(HeadersInterceptor())
 
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        clientBuilder.addInterceptor(httpLoggingInterceptor)
+        //clientBuilder.addInterceptor(httpLoggingInterceptor)
 
         return clientBuilder.build()
     }

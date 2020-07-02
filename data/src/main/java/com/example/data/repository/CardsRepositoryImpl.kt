@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class CardsRepositoryImpl : CardsRepository {
+class CardsRepositoryImpl(val baseUrl : String) : CardsRepository {
 
     override fun getClasses(): List<Classes> {
         return mutableListOf(Classes.DRUID, Classes.HUNTER, Classes.MAGE, Classes.PALADIN, Classes.ROGUE, Classes.SHAMAN, Classes.WARLOCK, Classes.WARRIOR, Classes.DREAM)
@@ -36,7 +36,7 @@ class CardsRepositoryImpl : CardsRepository {
 
     override fun getCardsByClass(cardClass : Classes): Single<List<CardDomain>> {
         return ServicesFactory.instance()
-            .getCardsServices()
+            .getCardsServices(baseUrl)
             .getCardsByClass(cardClass.text)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -49,7 +49,7 @@ class CardsRepositoryImpl : CardsRepository {
 
     override fun getCardsBySet(set: Sets): Single<List<CardDomain>> {
         return ServicesFactory.instance()
-            .getCardsServices()
+            .getCardsServices(baseUrl)
             .getCardsBySet(set.text)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -62,7 +62,7 @@ class CardsRepositoryImpl : CardsRepository {
 
     override fun getCardsByRace(race: Races): Single<List<CardDomain>> {
         return ServicesFactory.instance()
-            .getCardsServices()
+            .getCardsServices(baseUrl)
             .getCardsByRace(race.text)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -75,7 +75,7 @@ class CardsRepositoryImpl : CardsRepository {
 
     override fun getCardsByQuality(quality: Qualities): Single<List<CardDomain>> {
         return ServicesFactory.instance()
-            .getCardsServices()
+            .getCardsServices(baseUrl)
             .getCardsByQuality(quality.text)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -88,7 +88,7 @@ class CardsRepositoryImpl : CardsRepository {
 
     override fun getCardsByType(type: Types): Single<List<CardDomain>> {
         return ServicesFactory.instance()
-            .getCardsServices()
+            .getCardsServices(baseUrl)
             .getCardsByType(type.text)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -101,7 +101,7 @@ class CardsRepositoryImpl : CardsRepository {
 
     override fun getCardsByFaction(faction: Factions): Single<List<CardDomain>> {
         return ServicesFactory.instance()
-            .getCardsServices()
+            .getCardsServices(baseUrl)
             .getCardsByFaction(faction.text)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
