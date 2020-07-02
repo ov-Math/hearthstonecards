@@ -21,4 +21,9 @@ interface CardsServices {
     fun getCardsByRace(
         @Path("race") race : String
     ) : Single<List<Card>>
+
+    @GET("cards/qualities/{quality}")
+    fun getCardsByQuality(
+        @Path("quality") quality : String
+    ) : Single<List<Card>>
 }

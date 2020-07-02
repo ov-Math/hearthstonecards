@@ -72,4 +72,17 @@ class CardsRepositoryImpl : CardsRepository {
                 })
             }
     }
+
+    override fun getCardsByQuality(quality: Qualities): Single<List<CardDomain>> {
+        return ServicesFactory.instance()
+            .getCardsServices()
+            .getCardsByQuality(quality.text)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap {
+                Single.just(it.map {
+                    it.asDomainModel()
+                })
+            }
+    }
 }
