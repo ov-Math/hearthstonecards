@@ -85,4 +85,17 @@ class CardsRepositoryImpl : CardsRepository {
                 })
             }
     }
+
+    override fun getCardsByType(type: Types): Single<List<CardDomain>> {
+        return ServicesFactory.instance()
+            .getCardsServices()
+            .getCardsByType(type.text)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap {
+                Single.just(it.map {
+                    it.asDomainModel()
+                })
+            }
+    }
 }
