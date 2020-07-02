@@ -31,4 +31,9 @@ interface CardsServices {
     fun getCardsByType(
         @Path("type") type : String
     ) : Single<List<Card>>
+
+    @GET("cards/factions/{faction}")
+    fun getCardsByFaction(
+        @Path("faction") faction : String
+    ) : Single<List<Card>>
 }

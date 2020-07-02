@@ -17,7 +17,8 @@ class MainPresenter (private val navigator: Navigator,
                      private val getCardsBySet: GetCardsBySet,
                      private val getCardsByRace: GetCardsByRace,
                      private val getCardsByQuality: GetCardsByQuality,
-                     private val getCardsByType: GetCardsByType) : BasePresenter<MainView>() {
+                     private val getCardsByType: GetCardsByType,
+                     private val getCardsByFaction: GetCardsByFaction) : BasePresenter<MainView>() {
 
     var classesList = getClasses.execute()
     var racesList = getRaces.execute()
@@ -43,6 +44,9 @@ class MainPresenter (private val navigator: Navigator,
             }
             is Types -> {
                 getCardsByType(filter)
+            }
+            is Factions -> {
+                getCardsByFaction(filter)
             }
         }
     }
@@ -105,6 +109,19 @@ class MainPresenter (private val navigator: Navigator,
             .execute()
             .subscribe({
                 navigateCardLit(it, type.text)
+                view?.hideLoading()
+            },{
+                view?.hideLoading()
+                view?.showGenericError()
+            })
+    }
+
+    private fun getCardsByFaction(factions: Factions) {
+        getCardsByFaction
+            .with(factions)
+            .execute()
+            .subscribe({
+                navigateCardLit(it, factions.text)
                 view?.hideLoading()
             },{
                 view?.hideLoading()

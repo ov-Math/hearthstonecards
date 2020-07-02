@@ -16,5 +16,6 @@ object DomainModule {
         single { GetCardsByRace(get()) }
         single { GetCardsByQuality(get()) }
         single { GetCardsByType(get()) }
+        single { GetCardsByFaction(get()) }
     }
 }

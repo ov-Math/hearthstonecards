@@ -98,4 +98,17 @@ class CardsRepositoryImpl : CardsRepository {
                 })
             }
     }
+
+    override fun getCardsByFaction(faction: Factions): Single<List<CardDomain>> {
+        return ServicesFactory.instance()
+            .getCardsServices()
+            .getCardsByFaction(faction.text)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap {
+                Single.just(it.map {
+                    it.asDomainModel()
+                })
+            }
+    }
 }

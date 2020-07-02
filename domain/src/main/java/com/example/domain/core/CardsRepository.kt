@@ -15,4 +15,5 @@ interface CardsRepository {
     fun getCardsByRace(race : Races) : Single<List<CardDomain>>
     fun getCardsByQuality(quality : Qualities) : Single<List<CardDomain>>
     fun getCardsByType(type : Types) : Single<List<CardDomain>>
+    fun getCardsByFaction(faction : Factions) : Single<List<CardDomain>>
 }
