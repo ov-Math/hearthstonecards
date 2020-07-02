@@ -11,4 +11,9 @@ interface CardsServices {
     fun getCardsByClass(
         @Path("class") cardClass : String
     ) : Single<List<Card>>
+
+    @GET("cards/sets/{set}")
+    fun getCardsBySet(
+        @Path("set") set : String
+    ) : Single<List<Card>>
 }

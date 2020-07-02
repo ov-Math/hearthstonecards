@@ -11,4 +11,5 @@ interface CardsRepository {
     fun getFactions() : List<Factions>
     fun getQualities() : List<Qualities>
     fun getCardsByClass(cardClass : Classes) : Single<List<CardDomain>>
+    fun getCardsBySet(set : Sets) : Single<List<CardDomain>>
 }

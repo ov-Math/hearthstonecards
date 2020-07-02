@@ -46,4 +46,17 @@ class CardsRepositoryImpl : CardsRepository {
                 })
             }
     }
+
+    override fun getCardsBySet(set: Sets): Single<List<CardDomain>> {
+        return ServicesFactory.instance()
+            .getCardsServices()
+            .getCardsBySet(set.text)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap {
+                Single.just(it.map {
+                    it.asDomainModel()
+                })
+            }
+    }
 }
